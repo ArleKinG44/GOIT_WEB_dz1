@@ -1,0 +1,17 @@
+from abc import ABC, abstractmethod
+
+class UserInterface(ABC):
+    @abstractmethod
+    def get_input(self, prompt: str) -> str:
+        pass
+
+    @abstractmethod
+    def show_output(self, output: str) -> None:
+        pass
+
+class ConsoleUserInterface(UserInterface):
+    def get_input(self, prompt: str) -> str:
+        return input(prompt)
+
+    def show_output(self, output: str) -> None:
+        print(output)
