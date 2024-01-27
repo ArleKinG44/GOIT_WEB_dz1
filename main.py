@@ -1,4 +1,4 @@
-from user_interface import ConsoleUserInterface, UserInterface
+from user_interface import *
 from tabulate import tabulate
 from termcolor import colored
 from prompt_toolkit import PromptSession
@@ -694,25 +694,6 @@ def choice_action(data, commands):
     return unknown_command, None
 
 
-def main():
-
-    filename = input("Please enter the filename to load/create the Personal Assistant: ").strip()
-
-    address_book.load_from_disk(filename, notebook)
-    print("\nWelcome to Your Personal Assistant!\n",
-          "Type 'help' to see available commands and instructions.")
-    session = PromptSession(
-        lexer=PygmentsLexer(SqlLexer), completer=sql_completer)
-    while True:
-        data = session.prompt("\nPlease enter the command: ").lower().strip()
-        func, args = choice_action(data, commands)
-        result = func(args) if args else func()
-        print(result)
-        if result == "Good bye!":
-            address_book.save_to_disk(filename, notebook)
-            break
-
-
 if __name__ == "__main__":
     filename = console_ui.get_input("Please enter the filename to load/create the Personal Assistant: ").strip()
 
@@ -730,4 +711,3 @@ if __name__ == "__main__":
         if result == "Good bye!":
             address_book.save_to_disk(filename, notebook)
             break
-        
